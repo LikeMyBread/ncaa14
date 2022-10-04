@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
 import { Input, InputLabel, MenuItem, Rating, Select } from '@mui/material';
 
-import styles from './App.css';
+import './App.css';
 
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 });
 
-const POSITION_RATINGS = {
+const POSITION_RATINGS : { [key: string]: string } = {
   'Head Coach': 'Overall',
   'Offensive Coordinator': 'Offense',
   'Defensive Coordinator': 'Defense'
+};
+
+interface Contract {
+  position: string,
+  prestige: number,
+  rating: number,
+  offer: number,
+  year: number,
+}
+
+interface ContractUpdate {
+  position?: string,
+  prestige?: number,
+  rating?: number,
+  offer?: number,
+  year?: number,
 }
 
 export default function App() {
@@ -26,7 +42,7 @@ export default function App() {
 
   const [values, setValues] = useState(defaultValues);
 
-  function updateOffer(change) {
+  function updateOffer(change: ContractUpdate) {
     const updatedValues = {...values, ...change};
 
     updatedValues.prestige = Math.min(6, Math.max(1, updatedValues.prestige));
@@ -36,7 +52,7 @@ export default function App() {
     setValues(updatedValues);
   }
 
-  function calculateOffer(values) {
+  function calculateOffer(values: Contract) {
     let predictionRating = 0;
     let predictionPrestige = 0;
     let prediction2013 = 0;
@@ -66,7 +82,7 @@ export default function App() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className="container">
       <h2>NCAA 14 Contract Estimator</h2>
       <form>
         <InputLabel id="position-label">Position</InputLabel>
@@ -86,7 +102,7 @@ export default function App() {
           name="prestige"
           max={6}
           value={values.prestige}
-          onChange={(e) => {updateOffer({prestige: e.target.value})}}
+          onChange={(e) => {updateOffer({prestige: parseInt((e.target as HTMLInputElement).value)})}}
         />
         <InputLabel id="rating-label">{POSITION_RATINGS[values.position] + " Rating"}</InputLabel>
         <Input
@@ -96,7 +112,7 @@ export default function App() {
           label="Rating"
           type="number"
           value={values.rating}
-          onChange={(e) => {updateOffer({rating: e.target.value})}}
+          onChange={(e) => {updateOffer({rating: parseInt(e.target.value)})}}
         />
         <InputLabel id="year-label">Year</InputLabel>
         <Input
@@ -106,7 +122,7 @@ export default function App() {
           label="Year"
           type="number"
           value={values.year}
-          onChange={(e) => {updateOffer({year: e.target.value})}}
+          onChange={(e) => {updateOffer({year: parseInt(e.target.value)})}}
         />
         <div>Total Offer: {formatter.format(values.offer)}</div>
       </form>
