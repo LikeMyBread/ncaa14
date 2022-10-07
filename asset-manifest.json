@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ncaa14/static/css/main.ca4ec83a.css",
+    "main.js": "/ncaa14/static/js/main.a587072d.js",
+    "static/js/787.d7641176.chunk.js": "/ncaa14/static/js/787.d7641176.chunk.js",
+    "index.html": "/ncaa14/index.html",
+    "main.ca4ec83a.css.map": "/ncaa14/static/css/main.ca4ec83a.css.map",
+    "main.a587072d.js.map": "/ncaa14/static/js/main.a587072d.js.map",
+    "787.d7641176.chunk.js.map": "/ncaa14/static/js/787.d7641176.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca4ec83a.css",
+    "static/js/main.a587072d.js"
+  ]
+}
