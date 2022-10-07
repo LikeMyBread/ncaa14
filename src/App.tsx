@@ -12,7 +12,7 @@ const POSITION_RATINGS : { [key: string]: string } = {
   'Head Coach': 'Overall',
   'Offensive Coordinator': 'Offense',
   'Defensive Coordinator': 'Defense'
-};
+} as const;
 
 interface Contract {
   position: string,
@@ -83,7 +83,7 @@ export default function App() {
 
   return (
     <div className="container">
-      <h2>NCAA 14 Contract Estimator</h2>
+      <h1>NCAA 14 Contract Estimator</h1>
       <form>
         <InputLabel id="position-label">Position</InputLabel>
         <Select
@@ -92,6 +92,7 @@ export default function App() {
           value={values.position}
           label="Position"
           onChange={(e) => {updateOffer({position: e.target.value})}}
+          style={{minWidth: "14em"}}
         >
           <MenuItem value={"Head Coach"}>Head Coach</MenuItem>
           <MenuItem value={"Offensive Coordinator"}>Offensive Coordinator</MenuItem>
@@ -106,7 +107,8 @@ export default function App() {
         />
         <InputLabel id="rating-label">{POSITION_RATINGS[values.position] + " Rating"}</InputLabel>
         <Input
-          labelId="rating-label"
+          // @ts-expect-error
+          labelid="rating-label"
           id="rating"
           name="rating"
           label="Rating"
@@ -116,7 +118,8 @@ export default function App() {
         />
         <InputLabel id="year-label">Year</InputLabel>
         <Input
-          labelId="year-label"
+          // @ts-expect-error
+          labelid="year-label"
           id="year"
           name="year"
           label="Year"
@@ -124,8 +127,9 @@ export default function App() {
           value={values.year}
           onChange={(e) => {updateOffer({year: parseInt(e.target.value)})}}
         />
-        <div>Total Offer: {formatter.format(values.offer)}</div>
+
       </form>
+      <h2>Total Offer: {formatter.format(values.offer)}</h2>
     </div>
   );
 }
